@@ -1,5 +1,5 @@
 
-
+#from data import *
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -13,7 +13,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
-df = pd.read_csv('/Users/chris.christie92/Fauci2.0s/COVID-19-Dashboard/dashapp/covid_data/covid-19-data/live/us-states.csv')
+df = pd.read_csv('/Users/chris.christie92/Fauci2.0s/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 
 fig = px.bar(df, x="state", y="cases", color="state")
 
