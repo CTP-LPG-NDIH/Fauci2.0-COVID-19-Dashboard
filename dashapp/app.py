@@ -12,10 +12,9 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
-df = pd.read_csv('/Users/chris.christie92/Fauci2.0s/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+df = pd.read_csv('C:/Users/David/Documents/GitHub/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 
 import plotly.graph_objects as go
-
 
 
 fig = go.Figure()
@@ -39,7 +38,7 @@ fig.update_layout(
         tickfont_size=14,
     ),
     legend=dict(
-       
+
         bgcolor='rgba(255, 255, 255, 0)',
         bordercolor='rgba(255, 255, 255, 0)'
     ),
@@ -114,7 +113,7 @@ app.layout = html.Div(children=[
 			{'label': 'West Virginia','value': 'West Virginia'},
 			{'label': 'Wisconsin','value': 'Wisconsin'},
 			{'label': 'Wyoming','value': 'Wyoming'}
-            
+
 
         ],
         value=['New York'],
@@ -159,7 +158,7 @@ def update_figure(selected_states):
         tickfont_size=14,
     ),
     legend=dict(
-       
+
         bgcolor='rgba(255, 255, 255, 0)',
         bordercolor='rgba(255, 255, 255, 0)'
     ),
