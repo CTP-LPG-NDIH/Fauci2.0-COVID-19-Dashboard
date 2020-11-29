@@ -19,11 +19,13 @@ from death_case_graph import fig_0
 app.layout = fig_0
 
 #callbacks
-df = pd.read_csv('/Users/chris.christie92/Fauci2.0s/Fauci2.0-COVID-19-Dashboard/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+df = pd.read_csv('C:/Users/Isaiah/Documents/Github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 
 @app.callback(
     Output('state-cases-bar-graph', 'figure'),
     [Input('dropdown-1', 'value')])
+
+
 def update_figure(selected_states):
 	#print((selected_states))
 	new_df = pd.DataFrame()

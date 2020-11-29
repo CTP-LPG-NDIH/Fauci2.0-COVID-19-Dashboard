@@ -1,14 +1,29 @@
 
-
+# Dash
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.express as px
 import pandas as pd
 from dash.dependencies import Input, Output
+
+#Plotly Libraries
+import plotly.express as px
 import plotly.graph_objects as go
 
-df = pd.read_csv('/Users/chris.christie92/Fauci2.0s/Fauci2.0-COVID-19-Dashboard/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+# Other Libraries
+from urllib.request import urlopen
+import json
+
+
+# us-states dataset
+df = pd.read_csv('C:/Users/Isaiah/Documents/Github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+
+# mask-use dataset
+df_2 = pd.read_csv('C:/Users/Isaiah/Documents/Github/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+    counties = json.load(response)
+
+
 fig = go.Figure()
 fig.add_trace(go.Bar(x=df['state'],
                 y=df['cases'],
@@ -39,14 +54,71 @@ fig.update_layout(
     bargroupgap=0.1 # gap between bars of the same location coordinate.
 )
 
+fig_2 = go.Figure()
+fig_2 = px.choropleth_mapbox(df_2, geojson=counties, locations='COUNTYFP', color='NEVER',
+                           color_continuous_scale=["blue", "red"],
+                           range_color=(0, 0.5),
+                           mapbox_style="carto-positron",
+                           zoom=3, center = {"lat": 37.0902, "lon": -95.7129},
+                           opacity=0.5,
+                           labels={'NEVER':'Never'}
+                          )
+fig_2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+
+fig_3 = px.scatter(df, x="deaths", y="cases", size="cases", hover_name="state", size_max=40)
+
+
+
+df['text'] = 'state: ' + df['state'] + ' '+'<br>cases: ' + df['cases'].astype(str) + ' ' + '<br>deaths: ' + df['deaths'].astype(str)
+limits = [(0,1000000)]
+colors = ["royalblue","royalblue","royalblue","royalblue","royalblue"]
+scale = 500
+
+fig_4 = go.Figure()
+
+for i in range(len(limits)):
+    lim = limits[i]
+    df_sub = df[lim[0]:lim[1]]
+    fig_4.add_trace(go.Scattergeo(
+        locationmode = 'USA-states',
+        lon = df['longitude'],
+        lat = df['latitude'],
+        text = df['text'],
+        marker = dict(
+            size = df['cases']/scale,
+            color = colors[i],
+            line_color='rgb(40,40,40)',
+            line_width=0.5,
+            sizemode = 'area'
+        ),
+        name = '{0} - {1}'.format(lim[0],lim[1])))
+
+fig_4.update_layout(
+        title_text = 'COVID-19 cases across the U.S',
+        geo = dict(
+            scope = 'usa',
+            landcolor = 'rgb(217, 217, 217)',
+        )
+    )
+
+
+# App Layout
 
 fig_0 = html.Div(children=[
     html.H1(children='Covid19 dashboard'),
 
-    html.Div(children='''
-        State By State Cases
-    '''),
-    html.Label('State Dropdown'),
+    html.Div(children=''' '''),
+    html.Label(' '),
+
+    dcc.Graph(
+        id='bubble-map',
+        figure=fig_4
+    ),
+    dcc.Graph(
+        id='mask-use-map',
+        figure=fig_2
+    ),
     dcc.Dropdown(
     	id='dropdown-1',
         options=[
@@ -114,5 +186,12 @@ fig_0 = html.Div(children=[
     dcc.Graph(
         id='state-cases-bar-graph',
         figure=fig
+    ),
+    dcc.Graph(
+        id='scatterplot',
+        figure=fig_3
     )
+
+
+
 ])
