@@ -16,10 +16,10 @@ import json
 
 
 # us-states dataset
-df = pd.read_csv('C:/Users/Isaiah/Documents/Github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+df = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 
 # mask-use dataset
-df_2 = pd.read_csv('C:/Users/Isaiah/Documents/Github/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
+df_2 = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
@@ -63,7 +63,7 @@ fig_2 = px.choropleth_mapbox(df_2, geojson=counties, locations='COUNTYFP', color
                            opacity=0.5,
                            labels={'NEVER':'Never'}
                           )
-fig_2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+fig_2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, title='No mask use by county')
 
 
 fig_3 = px.scatter(df, x="deaths", y="cases", size="cases", hover_name="state", size_max=40)
@@ -109,16 +109,7 @@ fig_0 = html.Div(children=[
     html.H1(children='Covid19 dashboard'),
 
     html.Div(children=''' '''),
-    html.Label(' '),
-
-    dcc.Graph(
-        id='bubble-map',
-        figure=fig_4
-    ),
-    dcc.Graph(
-        id='mask-use-map',
-        figure=fig_2
-    ),
+    html.Label(''),
     dcc.Dropdown(
     	id='dropdown-1',
         options=[
@@ -182,11 +173,21 @@ fig_0 = html.Div(children=[
         ],
         value=['New York'],
         multi=True
+),
+    dcc.Graph(
+        id='bubble-map',
+        figure=fig_4
+    ),
+    html.Label('No mask use by county'),
+    dcc.Graph(
+        id='mask-use-map',
+        figure=fig_2
     ),
     dcc.Graph(
         id='state-cases-bar-graph',
         figure=fig
     ),
+    html.Label('Cases V. Deaths'),
     dcc.Graph(
         id='scatterplot',
         figure=fig_3

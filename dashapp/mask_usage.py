@@ -8,7 +8,7 @@ import pandas as pd
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 
-df = pd.read_csv('C:/Users/Isaiah/Documents/Github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+df = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 fig = go.Figure()
 fig.add_trace(go.Bar(x=df['state'],
                 y=df['cases'],
