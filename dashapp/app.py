@@ -8,6 +8,10 @@ from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 from urllib.request import urlopen
 import json
+import os 
+import pathlib
+
+APP_PATH = str(pathlib.Path(__file__).parent.resolve().parent.resolve())
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -21,18 +25,21 @@ from death_case_graph import fig_0
 
 app.layout = fig_0
 
-#callbacks
-df = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+
+df = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "us-states.csv")))
+
 #chloropleth map dataset
-df_2 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
+df_2 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "mask-use.csv")), dtype={"COUNTYFP": str})
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
 # us dataset
-df_3 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/us.csv')
+
+df_3 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "us.csv")))
 
 # COVID-19 tracker dataset
-df_4 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/all-states-history.csv')
+
+df_4 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "all-states-history.csv")))
 
 @app.callback(
     Output('state-cases-bar-graph', 'figure'),#Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure'),
