@@ -16,12 +16,18 @@ import json
 
 
 # us-states dataset
-df = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+df = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 
 # mask-use dataset
-df_2 = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
+df_2 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
+
+# us dataset
+df_3 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/us.csv')
+
+# COVID-19 tracker dataset
+df_4 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/all-states-history.csv')
 
 
 fig = go.Figure()
@@ -55,15 +61,15 @@ fig.update_layout(
 )
 
 fig_2 = go.Figure()
-fig_2 = px.choropleth_mapbox(df_2, geojson=counties, locations='COUNTYFP', color='NEVER',
-                           color_continuous_scale=["blue", "red"],
-                           range_color=(0, 0.5),
+fig_2 = px.choropleth_mapbox(df_2, geojson=counties, locations='COUNTYFP', color='ALWAYS',
+                           color_continuous_scale=["red", "blue"],
+                           range_color=(0, 1),
                            mapbox_style="carto-positron",
                            zoom=3, center = {"lat": 37.0902, "lon": -95.7129},
                            opacity=0.5,
-                           labels={'NEVER':'Never'}
+                           labels={'ALWAYS':'Always'}
                           )
-fig_2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, title='No mask use by county')
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 
 fig_3 = px.scatter(df, x="deaths", y="cases", size="cases", hover_name="state", size_max=40)
@@ -101,6 +107,19 @@ fig_4.update_layout(
             landcolor = 'rgb(217, 217, 217)',
         )
     )
+
+
+fig_5 = px.line(df_3, x="date", y="cases") # cases rolling average
+
+fig_6 = px.line(df_3, x="date", y="deaths") # deaths rolling average
+
+fig_7 = px.line(df_4, x="date", y="positive") # Positive cases by state
+
+fig_8 = px.line(df_4, x="date", y="hospitalized") # Hospitalized
+
+fig_9 = px.line(df_4, x="date", y="hospitalizedCurrently")  # Currently hospitalized
+
+fig_10 = px.line(df_4, x="date", y="deathIncrease") # Death increases
 
 
 # App Layout
@@ -191,8 +210,15 @@ fig_0 = html.Div(children=[
     dcc.Graph(
         id='scatterplot',
         figure=fig_3
+    ),
+    dcc.Graph(
+        id='cases-ra',
+        figure=fig_5
+    ),
+    dcc.Graph(
+        id='deaths-ra',
+        figure=fig_6
     )
-
 
 
 ])

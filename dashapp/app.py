@@ -10,7 +10,6 @@ from urllib.request import urlopen
 import json
 
 
-
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -23,14 +22,20 @@ from death_case_graph import fig_0
 app.layout = fig_0
 
 #callbacks
-df = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
+df = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/us-states.csv')
 #chloropleth map dataset
-df_2 = pd.read_csv('/Users/nick/github/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
+df_2 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/mask-use.csv', dtype={"COUNTYFP": str})
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
+# us dataset
+df_3 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/us.csv')
+
+# COVID-19 tracker dataset
+df_4 = pd.read_csv('/Users/Isaiah/Desktop/Fauci2.0-COVID-19-Dashboard/data/all-states-history.csv')
+
 @app.callback(
-    Output('state-cases-bar-graph', 'figure'),Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure'),
+    Output('state-cases-bar-graph', 'figure'),#Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure'),
     [Input('dropdown-1', 'value')])
 def update_figure(selected_states):
     new_df_2 = pd.DataFrame()
@@ -48,15 +53,15 @@ def update_figure(selected_states):
 
 
     fig_2 = go.Figure()
-    fig_2 = px.choropleth_mapbox(new_df_2, geojson=counties, locations='COUNTYFP', color='NEVER',
-                               color_continuous_scale=["blue", "red"],
-                               range_color=(0, 0.5),
-                               mapbox_style="carto-positron",
-                               zoom=3, center = {"lat": 37.0902, "lon": -95.7129},
-                               opacity=0.5,
-                               labels={'NEVER':'Never'}
-                              )
-    fig_2.update_layout(margin={"r":0,"t":0,"l":0,"b":0}, title='No mask use by county')
+    fig_2 = px.choropleth_mapbox(df_2, geojson=counties, locations='COUNTYFP', color='ALWAYS',
+                           color_continuous_scale=["red", "blue"],
+                           range_color=(0, 1),
+                           mapbox_style="carto-positron",
+                           zoom=3, center = {"lat": 37.0902, "lon": -95.7129},
+                           opacity=0.5,
+                           labels={'ALWAYS':'Always'}
+                          )
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     fig.update_layout(transition_duration=500)
 
     fig_3 = px.scatter(new_df, x="deaths", y="cases", size="cases", hover_name="state", size_max=40)
@@ -89,8 +94,25 @@ def update_figure(selected_states):
         )
 
     )
-    return fig, fig_2,fig_3,fig_4
+    fig_5 = px.line(df_3, x="date", y="cases")  # cases rolling average
 
+    fig_6 = px.line(df_3, x="date", y="deaths")  # deaths rolling average
+
+    return fig, fig_2, fig_3, fig_4, fig_5, fig_6
+
+
+
+# positive by state call back
+#@app.callback(
+    #Output("positive-by-state", "figure"),
+    #[Input("dropdown-1", "value")])
+
+#def display_time_series(selected_states):
+    #AK = df_4.loc[df_4[selected_states] == selected_states]
+    #AK_df = pd.DataFrame(data=AK)
+
+    #fig_7 = px.line(AK_df, x="date", y="positive")
+    #return fig_7
 
 
 if __name__ == '__main__':
