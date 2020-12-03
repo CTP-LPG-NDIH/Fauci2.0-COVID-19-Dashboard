@@ -21,7 +21,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
 
-from death_case_graph import fig_0
+from app_layout import fig_0
 
 app.layout = fig_0
 
@@ -42,7 +42,7 @@ df_3 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "us.csv")))
 df_4 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "all-states-history.csv")))
 
 @app.callback(
-    Output('state-cases-bar-graph', 'figure'),#Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure'),
+    [Output('state-cases-bar-graph', 'figure'),Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure')],
     [Input('dropdown-1', 'value')])
 def update_figure(selected_states):
     new_df_2 = pd.DataFrame()
@@ -60,7 +60,7 @@ def update_figure(selected_states):
 
 
     fig_2 = go.Figure()
-    fig_2 = px.choropleth_mapbox(df_2, geojson=counties, locations='COUNTYFP', color='ALWAYS',
+    fig_2 = px.choropleth_mapbox(new_df_2, geojson=counties, locations='COUNTYFP', color='ALWAYS',
                            color_continuous_scale=["red", "blue"],
                            range_color=(0, 1),
                            mapbox_style="carto-positron",
@@ -105,7 +105,7 @@ def update_figure(selected_states):
 
     fig_6 = px.line(df_3, x="date", y="deaths")  # deaths rolling average
 
-    return fig, fig_2, fig_3, fig_4, fig_5, fig_6
+    return fig, fig_2, fig_3, fig_4# fig_5, fig_6
 
 
 
