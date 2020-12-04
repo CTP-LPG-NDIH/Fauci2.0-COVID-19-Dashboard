@@ -6,11 +6,12 @@ from dash.dependencies import Input, Output
 # App Layout
 
 #import graph figures here
-from death_case_graph import fig
+from death_case_graph import fig, fig_7, fig_8, fig_9, fig_10
 from mask_usage import fig_2
 from scatter import fig_3
 from scatter_geo import fig_4
 from rolling_avg import fig_5,fig_6
+from airport_map import fig_11
 
 
 fig_0 = html.Div(children=[
@@ -86,7 +87,7 @@ fig_0 = html.Div(children=[
         id='bubble-map',
         figure=fig_4
     ),
-    html.Label('No mask use by county'),
+    html.Label('Mask use by county'),
     dcc.Graph(
         id='mask-use-map',
         figure=fig_2
@@ -100,14 +101,37 @@ fig_0 = html.Div(children=[
         id='scatterplot',
         figure=fig_3
     ),
-    dcc.Graph(
+	html.Label('Cumulative Case Counts in the U.S'),
+	dcc.Graph(
         id='cases-ra',
         figure=fig_5
     ),
-    dcc.Graph(
+	html.Label('Cumulative Death Counts in the U.S'),
+	dcc.Graph(
         id='deaths-ra',
         figure=fig_6
-    )
+    ),
+	dcc.Graph(
+		id='state-positives',
+		figure=fig_7
+	),
+	dcc.Graph(
+		id='hospitalized',
+		figure=fig_8
+	),
+	dcc.Graph(
+		id='hospitalized-currently',
+		figure=fig_9
+	),
+	dcc.Graph(
+		id='death-increases',
+		figure=fig_10
+	),
+	dcc.Graph(
+		id='airport-map',
+		figure=fig_11
+	),
+
 
 
 ])

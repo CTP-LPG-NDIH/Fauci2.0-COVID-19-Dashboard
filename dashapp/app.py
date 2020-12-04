@@ -105,7 +105,15 @@ def update_figure(selected_states):
 
     fig_6 = px.line(df_3, x="date", y="deaths")  # deaths rolling average
 
-    return fig, fig_2, fig_3, fig_4# fig_5, fig_6
+    fig_7 = px.line(df_4, x="date", y="positive")  # Positive cases by state
+
+    fig_8 = px.line(df_4, x="date", y="hospitalized")  # Hospitalized
+
+    fig_9 = px.line(df_4, x="date", y="hospitalizedCurrently")  # Currently hospitalized
+
+    fig_10 = px.line(df_4, x="date", y="deathIncrease")  # Death increases
+
+    return fig, fig_2, fig_3, fig_4
 
 
 

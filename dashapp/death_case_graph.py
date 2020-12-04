@@ -62,16 +62,6 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 df_4 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "all-states-history.csv")))
 
 
-
-
-
-
-
-
-
-
-
-
 fig_7 = px.line(df_4, x="date", y="positive") # Positive cases by state
 
 fig_8 = px.line(df_4, x="date", y="hospitalized") # Hospitalized
