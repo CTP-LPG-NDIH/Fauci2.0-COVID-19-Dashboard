@@ -111,18 +111,22 @@ fig_0 = html.Div(children=[
         id='deaths-ra',
         figure=fig_6
     ),
+	html.Label('State Line Graph of Positive Cases'),
 	dcc.Graph(
 		id='state-positives',
 		figure=fig_7
 	),
+	html.Label('No. of People Hospitalized'),
 	dcc.Graph(
 		id='hospitalized',
 		figure=fig_8
 	),
+	html.Label('No. of People Hospitalized Currently'),
 	dcc.Graph(
 		id='hospitalized-currently',
 		figure=fig_9
 	),
+	html.Label('State Death Increases'),
 	dcc.Graph(
 		id='death-increases',
 		figure=fig_10
