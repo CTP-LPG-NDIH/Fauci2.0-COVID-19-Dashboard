@@ -4,19 +4,17 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import pandas as pd
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
+import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 from urllib.request import urlopen
 import json
-import os 
+import os
 import pathlib
 
 APP_PATH = str(pathlib.Path(__file__).parent.resolve().parent.resolve())
 
-
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
@@ -24,7 +22,6 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 from app_layout import fig_0
 
 app.layout = fig_0
-
 
 df = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "us-states.csv")))
 
@@ -41,9 +38,13 @@ df_3 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "us.csv")))
 
 df_4 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "all-states-history.csv")))
 
+
+
+
 @app.callback(
     [Output('state-cases-bar-graph', 'figure'),Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure')],
     [Input('dropdown-1', 'value')])
+
 def update_figure(selected_states):
     new_df_2 = pd.DataFrame()
     new_df = pd.DataFrame()
@@ -52,6 +53,7 @@ def update_figure(selected_states):
         new_df = new_df.append(to_append)
         to_append = pd.DataFrame(df_2[df_2.STATE == state])
         new_df_2 = new_df_2.append(to_append)
+
     fig = go.Figure()
     fig.add_trace(go.Bar(x=new_df['state'], y=new_df['cases'], name='Cases by State', marker_color='rgb(55, 83, 109)'))
     fig.add_trace(go.Bar(x=new_df['state'], y=new_df['deaths'],name='Deaths by State',marker_color='rgb(26, 118, 255)'))

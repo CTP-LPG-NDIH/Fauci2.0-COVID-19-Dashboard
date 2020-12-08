@@ -2,6 +2,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 
 # App Layout
 
@@ -14,9 +15,137 @@ from rolling_avg import fig_5,fig_6
 from airport_map import fig_11
 
 
-fig_0 = html.Div(children=[
-    html.H1(children='Covid19 dashboard'),
+cards_1 = dbc.CardDeck(
+    [
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("Intl. Airports Volume in the U.S", className="card-title"),
+                    html.P(
+                        "Volume of International Airports may play "
+                        "a key role in the case growth of certain states.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="success", className="mt-auto"
+                    ),
+					dcc.Graph(figure=fig_11)
+                ]
+            )
+        ),
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("Cumulative Death Counts in the United States", className="card-title"),
+                    html.P(
+                        "The total number of cases in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="warning", className="mt-auto"
+                    ),
+					dcc.Graph(figure=fig_6)
+                ]
+            )
+        ),
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("Cumulative Case Counts in the United States", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(figure=fig_5)
+                ]
+            )
+        ),
+    ]
+)
 
+cards_2 = dbc.CardDeck(
+    [
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("Death Increases Counts in the United States", className="card-title"),
+                    html.P(
+                        "The total number of death increases in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(id='death-increases', figure=fig_10)
+                ]
+            )
+        ),
+    ]
+)
+
+cards_3 = dbc.CardDeck(
+    [
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("No. of People Hospitalized in the U.S", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(figure=fig_8)
+                ]
+            )
+        ),
+		dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("No. of People Currently Hospitalized", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(figure=fig_9)
+                ]
+            )
+        ),
+    ]
+)
+
+
+navbar = dbc.NavbarSimple(
+    children=[
+        dbc.NavItem(dbc.NavLink("Home Page", href="#")),
+        dbc.DropdownMenu(
+			children=[
+				dbc.DropdownMenuItem("More", header=True),
+				dbc.DropdownMenuItem("Page 2", href="#"),
+				dbc.DropdownMenuItem("Page 3", href="#"),
+			],
+            nav=True,
+            in_navbar=True,
+            label="More Pages",
+        ),
+    ],
+    brand="COVID-19 Dash-Board",
+    brand_href="#",
+    color="primary",
+    dark=True,
+)
+
+
+
+fig_0 = html.Div(children=[
+	navbar,
     html.Div(children=''' '''),
     html.Label(''),
     dcc.Dropdown(
@@ -79,7 +208,7 @@ fig_0 = html.Div(children=[
 			{'label': 'Wyoming','value': 'Wyoming'}
 
 
-        ],
+		],
         value=['New York'],
         multi=True
 ),
@@ -101,41 +230,8 @@ fig_0 = html.Div(children=[
         id='scatterplot',
         figure=fig_3
     ),
-	html.Label('Cumulative Case Counts in the U.S'),
-	dcc.Graph(
-        id='cases-ra',
-        figure=fig_5
-    ),
-	html.Label('Cumulative Death Counts in the U.S'),
-	dcc.Graph(
-        id='deaths-ra',
-        figure=fig_6
-    ),
-	html.Label('State Line Graph of Positive Cases'),
-	dcc.Graph(
-		id='state-positives',
-		figure=fig_7
-	),
-	html.Label('No. of People Hospitalized'),
-	dcc.Graph(
-		id='hospitalized',
-		figure=fig_8
-	),
-	html.Label('No. of People Hospitalized Currently'),
-	dcc.Graph(
-		id='hospitalized-currently',
-		figure=fig_9
-	),
-	html.Label('State Death Increases'),
-	dcc.Graph(
-		id='death-increases',
-		figure=fig_10
-	),
-	dcc.Graph(
-		id='airport-map',
-		figure=fig_11
-	),
-
-
+	dbc.Row([dbc.Col(cards_1)]),
+	dbc.Row([dbc.Col(cards_2)]),
+	dbc.Row([dbc.Col(cards_3)])
 
 ])

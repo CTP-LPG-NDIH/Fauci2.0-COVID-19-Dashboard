@@ -6,7 +6,6 @@ import json
 import plotly.express as px
 import plotly.graph_objects as go
 
-
 APP_PATH = str(pathlib.Path(__file__).parent.resolve().parent.resolve())
 
 df_6 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "large_ap.csv")))
@@ -36,12 +35,9 @@ for i in range(len(limits)):
         name = '{0} - {1}'.format(lim[0],lim[1])))
 
 fig_11.update_layout(
-        title_text = 'Volume of Intl. Airports in the U.S',
         geo = dict(
             scope = 'usa',
             landcolor = 'rgb(217, 217, 217)',
         )
     )
-
-fig_11.show()
 
