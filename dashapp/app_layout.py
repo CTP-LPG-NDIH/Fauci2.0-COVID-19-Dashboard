@@ -122,6 +122,78 @@ cards_3 = dbc.CardDeck(
     ]
 )
 
+cards_4 = dbc.CardDeck(
+    [
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("No. of People Hospitalized in the U.S", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(id= 'state-cases-bar-graph', figure=fig)
+                ]
+            )
+        ),
+		dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("No. of People Currently Hospitalized", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(id='mask-use-map', figure=fig_2)
+                ]
+            )
+        ),
+    ]
+)
+
+cards_5 = dbc.CardDeck(
+    [
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("No. of People Hospitalized in the U.S", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(id='scatterplot', figure=fig_3)
+                ]
+            )
+        ),
+		dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5("No. of People Currently Hospitalized", className="card-title"),
+                    html.P(
+                        "The total number of deaths in the United States over time.",
+                        className="card-text",
+                    ),
+                    dbc.Button(
+                        "Click here", color="danger", className="mt-auto"
+                    ),
+					dcc.Graph(id='bubble-map', figure=fig_4)
+                ]
+            )
+        ),
+    ]
+)
+
+
+
 
 navbar = dbc.NavbarSimple(
     children=[
@@ -213,26 +285,11 @@ fig_0 = html.Div(children=[
         value=['New York','Florida','Texas','California','Illinois'],
         multi=True
 ),
-    dcc.Graph(
-        id='bubble-map',
-        figure=fig_4
-    ),
-    html.Label('Mask use by county'),
-    dcc.Graph(
-        id='mask-use-map',
-        figure=fig_2
-    ),
-    dcc.Graph(
-        id='state-cases-bar-graph',
-        figure=fig
-    ),
-    html.Label('Cases V. Deaths'),
-    dcc.Graph(
-        id='scatterplot',
-        figure=fig_3
-    ),
+
+    dbc.Row([dbc.Col(cards_4)]),
+    dbc.Row([dbc.Col(cards_5)]),
 	dbc.Row([dbc.Col(cards_1)]),
 	dbc.Row([dbc.Col(cards_2)]),
-	dbc.Row([dbc.Col(cards_3)])
+	dbc.Row([dbc.Col(cards_3)]),
 
 ])

@@ -39,8 +39,6 @@ df_3 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "us.csv")))
 df_4 = pd.read_csv(os.path.join(APP_PATH, os.path.join("data", "all-states-history.csv")))
 
 
-
-
 @app.callback(
     [Output('state-cases-bar-graph', 'figure'),Output('mask-use-map','figure'),Output('scatterplot','figure'),Output('bubble-map','figure')],
     [Input('dropdown-1', 'value')])
