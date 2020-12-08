@@ -94,7 +94,7 @@ def update_figure(selected_states):
         ),
         name =  '{0} - {1}'.format(lim[0],lim[1])))
     fig_4.update_layout(
-        title_text = 'COVID-19 cases across the U.S',
+
         geo = dict(
             scope = 'usa',
             landcolor = 'rgb(217, 217, 217)',

@@ -127,9 +127,9 @@ cards_4 = dbc.CardDeck(
         dbc.Card(
             dbc.CardBody(
                 [
-                    html.H5("No. of People Hospitalized in the U.S", className="card-title"),
+                    html.H5("COVID-19 Case/Death Ratio", className="card-title"),
                     html.P(
-                        "The total number of deaths in the United States over time.",
+                        "",
                         className="card-text",
                     ),
                     dbc.Button(
@@ -142,9 +142,9 @@ cards_4 = dbc.CardDeck(
 		dbc.Card(
             dbc.CardBody(
                 [
-                    html.H5("No. of People Currently Hospitalized", className="card-title"),
+                    html.H5("Mask Use by County", className="card-title"),
                     html.P(
-                        "The total number of deaths in the United States over time.",
+                        "",
                         className="card-text",
                     ),
                     dbc.Button(
@@ -162,9 +162,9 @@ cards_5 = dbc.CardDeck(
         dbc.Card(
             dbc.CardBody(
                 [
-                    html.H5("No. of People Hospitalized in the U.S", className="card-title"),
+                    html.H5("COVID-19 Cases Observing Outliers", className="card-title"),
                     html.P(
-                        "The total number of deaths in the United States over time.",
+                        "",
                         className="card-text",
                     ),
                     dbc.Button(
@@ -177,9 +177,9 @@ cards_5 = dbc.CardDeck(
 		dbc.Card(
             dbc.CardBody(
                 [
-                    html.H5("No. of People Currently Hospitalized", className="card-title"),
+                    html.H5("COVID-19 cases across the U.S", className="card-title"),
                     html.P(
-                        "The total number of deaths in the United States over time.",
+                        "",
                         className="card-text",
                     ),
                     dbc.Button(
