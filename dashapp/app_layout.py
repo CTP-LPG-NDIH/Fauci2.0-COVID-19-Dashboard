@@ -57,7 +57,8 @@ cards_1 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
+
+                    #    "Click here", color="danger", className="mt-auto"
                     ),
 					dcc.Graph(figure=fig_5)
                 ]
@@ -209,7 +210,7 @@ fig_0 = html.Div(children=[
 
 
 		],
-        value=['New York'],
+        value=['New York','Florida','Texas','California','Illinois'],
         multi=True
 ),
     dcc.Graph(
