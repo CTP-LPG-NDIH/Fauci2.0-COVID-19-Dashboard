@@ -201,8 +201,8 @@ navbar = dbc.NavbarSimple(
         dbc.DropdownMenu(
 			children=[
 				dbc.DropdownMenuItem("More", header=True),
-				dbc.DropdownMenuItem("Source Code", href="https://github.com/CTP-LPG-NDIH/Fauci2.0-COVID-19-Dashboard"),
-				dbc.DropdownMenuItem("Page 3", href="#"),
+				dbc.DropdownMenuItem("Source Code", href="https://github.com/CTP-LPG-NDIH/Fauci2.0-COVID-19-Dashboard",external_link=True),
+				dbc.DropdownMenuItem('About us', href="#"),
 			],
             nav=True,
             in_navbar=True,
