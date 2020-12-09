@@ -27,7 +27,7 @@ cards_1 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="success", className="mt-auto"
+                        " ", color="success", className="mt-auto"
                     ),
 					dcc.Graph(figure=fig_11)
                 ]
@@ -42,7 +42,7 @@ cards_1 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="warning", className="mt-auto"
+                        "", color="warning", className="mt-auto"
                     ),
 					dcc.Graph(figure=fig_6)
                 ]
@@ -78,7 +78,7 @@ cards_2 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
+                        "", color="danger", className="mt-auto"
                     ),
 					dcc.Graph(id='death-increases', figure=fig_10)
                 ]
@@ -98,7 +98,7 @@ cards_3 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
+                        "", color="danger", className="mt-auto"
                     ),
 					dcc.Graph(figure=fig_8)
                 ]
@@ -113,7 +113,7 @@ cards_3 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
+                        "", color="danger", className="mt-auto"
                     ),
 					dcc.Graph(figure=fig_9)
                 ]
@@ -133,7 +133,7 @@ cards_4 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
+                        "", color="danger", className="mt-auto"
                     ),
 					dcc.Graph(id= 'state-cases-bar-graph', figure=fig)
                 ]
@@ -148,7 +148,7 @@ cards_4 = dbc.CardDeck(
                         className="card-text",
                     ),
                     dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
+                        "", color="danger", className="mt-auto"
                     ),
 					dcc.Graph(id='mask-use-map', figure=fig_2)
                 ]
