@@ -26,9 +26,7 @@ cards_1 = dbc.CardDeck(
                         "a key role in the case growth of certain states.",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        " ", color="success", className="mt-auto"
-                    ),
+
 					dcc.Graph(figure=fig_11)
                 ]
             )
@@ -41,9 +39,7 @@ cards_1 = dbc.CardDeck(
                         "The total number of cases in the United States over time.",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "", color="warning", className="mt-auto"
-                    ),
+
 					dcc.Graph(figure=fig_6)
                 ]
             )
@@ -56,10 +52,7 @@ cards_1 = dbc.CardDeck(
                         "The total number of deaths in the United States over time.",
                         className="card-text",
                     ),
-                    dbc.Button(
 
-                    #    "Click here", color="danger", className="mt-auto"
-                    ),
 					dcc.Graph(figure=fig_5)
                 ]
             )
@@ -77,9 +70,7 @@ cards_2 = dbc.CardDeck(
                         "The total number of death increases in the United States over time.",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "", color="danger", className="mt-auto"
-                    ),
+
 					dcc.Graph(id='death-increases', figure=fig_10)
                 ]
             )
@@ -97,9 +88,7 @@ cards_3 = dbc.CardDeck(
                         "The total number of deaths in the United States over time.",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "", color="danger", className="mt-auto"
-                    ),
+
 					dcc.Graph(figure=fig_8)
                 ]
             )
@@ -112,9 +101,7 @@ cards_3 = dbc.CardDeck(
                         "The total number of deaths in the United States over time.",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "", color="danger", className="mt-auto"
-                    ),
+
 					dcc.Graph(figure=fig_9)
                 ]
             )
@@ -132,9 +119,7 @@ cards_4 = dbc.CardDeck(
                         "",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "", color="danger", className="mt-auto"
-                    ),
+
 					dcc.Graph(id= 'state-cases-bar-graph', figure=fig)
                 ]
             )
@@ -147,9 +132,7 @@ cards_4 = dbc.CardDeck(
                         "",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "", color="danger", className="mt-auto"
-                    ),
+
 					dcc.Graph(id='mask-use-map', figure=fig_2)
                 ]
             )
@@ -167,9 +150,7 @@ cards_5 = dbc.CardDeck(
                         "",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
-                    ),
+
 					dcc.Graph(id='scatterplot', figure=fig_3)
                 ]
             )
@@ -182,9 +163,7 @@ cards_5 = dbc.CardDeck(
                         "",
                         className="card-text",
                     ),
-                    dbc.Button(
-                        "Click here", color="danger", className="mt-auto"
-                    ),
+                    
 					dcc.Graph(id='bubble-map', figure=fig_4)
                 ]
             )
