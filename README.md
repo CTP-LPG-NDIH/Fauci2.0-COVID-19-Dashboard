@@ -7,6 +7,9 @@ COVID-19 virus permeates the lives of many in the United States where the case c
 
 https://covid19db2468.herokuapp.com
 
+
+![](assets/dbgif.gif)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
